@@ -9,6 +9,7 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable } from 'react-native';
+import { View } from '../components/Themed';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -58,17 +59,45 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Home"
       screenOptions={{
+        headerShown: false,
         tabBarActiveTintColor: Colors[colorScheme].tint,
+        headerTitle: "Mi Turno TV",
+        headerStyle: {
+          backgroundColor: 'red',
+        },
+        headerTitleStyle: {
+          color: 'white'
+        }
       }}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
+        name        = "Home"
+        component   = {TabOneScreen}
+        options     = {({ navigation }: RootTabScreenProps<'Home'>) => ({
+          tabBarStyle: {
+            backgroundColor: 'black',
+            color: 'white'
+          },
+          title: '',
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={'white'} />,
+
+        })}
+      />{/*
+      <BottomTab.Screen
+        name="TabTwo"
+        component={TabTwoScreen}
+        options={{
+          title: 'Tab Two',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
+        }}
+      />*/}
+    </BottomTab.Navigator>
+  );
+}
+
+/**
+           {/*headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
               style={({ pressed }) => ({
@@ -81,22 +110,7 @@ function BottomTabNavigator() {
                 style={{ marginRight: 15 }}
               />
             </Pressable>
-          ),
-        })}
-      />
-      <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-    </BottomTab.Navigator>
-  );
-}
-
-/**
+          ),*}
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
 function TabBarIcon(props: {
