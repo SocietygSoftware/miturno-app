@@ -8,15 +8,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+import { ColorSchemeName, Pressable, Linking } from 'react-native';
 import { View } from '../components/Themed';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import Home from '../screens/Home';
+import TabTwoScreen from '../screens/Home';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -69,29 +69,63 @@ function BottomTabNavigator() {
         },
         headerTitleStyle: {
           color: 'white'
-        }
+        },
+        tabBarStyle: {
+          backgroundColor: "#333333",
+          padding:10,
+        },
       }}>
+
+      <BottomTab.Screen
+        name        = "Website"
+        component   = {TabTwoScreen}
+        options     = {{
+          title: '',
+          tabBarIcon: ({ color }) => <TabBarIcon name= "globe" color={"skyblue"} onPress = {() => Linking.openURL("https://miturno.com.do/")}  />,
+        }}
+      />
+
+      <BottomTab.Screen
+        name        = "Youtube"
+        component   = {TabTwoScreen}
+        options     = {{
+          title: '',
+          tabBarIcon: ({ color }) => <TabBarIcon name="youtube-play" color={"#c4302b"} onPress = {() => Linking.openURL("https://www.youtube.com/@miturno/")}  />,
+        }}
+      />
+
       <BottomTab.Screen
         name        = "Home"
-        component   = {TabOneScreen}
+        component   = {Home}
         options     = {({ navigation }: RootTabScreenProps<'Home'>) => ({
           tabBarStyle: {
-            backgroundColor: 'black',
+            backgroundColor: "#333333",
             color: 'white'
           },
           title: '',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={'white'} />,
-
         })}
-      />{/*
+      />
+
       <BottomTab.Screen
-        name="TabTwo"
+        name = "Facebook"
         component={TabTwoScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: '',
+          tabBarIcon: ({ color }) => <TabBarIcon name="facebook-square" color={"#3b5998"} onPress = {() => Linking.openURL("https://www.facebook.com/MiTurnotv/")} />,
         }}
-      />*/}
+      />
+
+
+      <BottomTab.Screen
+        name = "Instagram"
+        component={TabTwoScreen}
+        options={{
+          title: '',
+          tabBarIcon: ({ color }) => <TabBarIcon name="instagram" color={"#833AB4"} onPress = {() => Linking.openURL("https://www.instagram.com/miturnotv/")} />,
+        }}
+      />
+
     </BottomTab.Navigator>
   );
 }
@@ -116,6 +150,7 @@ function BottomTabNavigator() {
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
   color: string;
+  onPress?: () => void
 }) {
   return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }

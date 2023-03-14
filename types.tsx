@@ -25,11 +25,39 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 >;
 
 export type RootTabParamList = {
+  Facebook: undefined;
+  Instagram: undefined;
+  Website: undefined;
+  Youtube: undefined;
   Home: undefined;
-//  TabTwo: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
   BottomTabScreenProps<RootTabParamList, Screen>,
   NativeStackScreenProps<RootStackParamList>
 >;
+
+
+export type newsItems =    {
+  id: string,
+  title: string,
+  description: string,
+  link: string,
+  author: string,
+  published: string;
+  created: string;
+  category: string;
+  content: string;
+  enclosures: [];
+  content_encoded: string;
+  media: {};
+}
+
+export type MiTurnoRSS = {
+  title: string;
+  description: string;
+  link: string;
+  image: string;
+  category: [];
+  items: newsItems []
+}
