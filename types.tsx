@@ -51,6 +51,7 @@ export type newsItems =    {
   enclosures: [];
   content_encoded: string;
   media: {};
+  thumbnail: string;
 }
 
 export type MiTurnoRSS = {

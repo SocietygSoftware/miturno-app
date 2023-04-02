@@ -13,10 +13,10 @@ import { View } from '../components/Themed';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import ModalScreen from '../screens/ModalScreen';
+import ModalScreen from '../screens/modal/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import Home from '../screens/Home';
-import TabTwoScreen from '../screens/Home';
+import Home from '../screens/home/Home';
+import TabTwoScreen from '../screens/home/Home';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -102,8 +102,7 @@ function BottomTabNavigator() {
             backgroundColor: "#333333",
             color: 'white'
           },
-          title: '',
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={'white'} />,
+          title: ''
         })}
       />
 
